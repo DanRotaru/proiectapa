@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Labirintul succesului</title>
+    <link rel="stylesheet" href="game.css">
+</head>
+<body>
+    <div class="bg"></div>
+    <div id="game">
+        <div class="h1">Labirintul succesului</div>
+        <div class="difficulty">
+            <select id="diffSelect">
+                <option value="10">Easy</option>
+                <option value="15">Medium</option>
+                <option value="25">Hard</option>
+                <option value="38">Extreme</option>
+            </select>
+            <div id="steps">0</div>
+            <div id="timer">0</div>
+        </div>
+        <div class="s-btn play"></div>
+        <div id="Message-Container">
+            <div id="message">
+                <h1>Felicitări!</h1>
+                <p>Ai trecut labirintul😀</p>
+                <p id="moves"></p>
+                <button class="btn" onclick="reload()">Nice</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="view">
+        <div id="mazeContainer">
+            <canvas id="mazeCanvas" class="border" height="1100" width="1100"></canvas>
+        </div>
+    </div>
+
+    <div class="info">
+        Folosește
+        <b>W</b>
+        <b>A</b>
+        <b>S</b>
+        <b>D</b>
+        sau
+        <b>&uparrow;</b>
+        <b>&larr;</b>
+        <b>&downarrow;</b>
+        <b>&rarr;</b>
+        pentru a controla caracterul
+    </div>
+
+    <div class="btns">
+        <button class="s-btn left-a" style="display: none;">
+            <svg viewBox="0 0 24 24" height="28px">
+                <path fill="#fff" d="M12,5A3.5,3.5 0 0,0 8.5,8.5A3.5,3.5 0 0,0 12,12A3.5,3.5 0 0,0 15.5,8.5A3.5,3.5 0 0,0 12,5M12,7A1.5,1.5 0 0,1 13.5,8.5A1.5,1.5 0 0,1 12,10A1.5,1.5 0 0,1 10.5,8.5A1.5,1.5 0 0,1 12,7M5.5,8A2.5,2.5 0 0,0 3,10.5C3,11.44 3.53,12.25 4.29,12.68C4.65,12.88 5.06,13 5.5,13C5.94,13 6.35,12.88 6.71,12.68C7.08,12.47 7.39,12.17 7.62,11.81C6.89,10.86 6.5,9.7 6.5,8.5C6.5,8.41 6.5,8.31 6.5,8.22C6.2,8.08 5.86,8 5.5,8M18.5,8C18.14,8 17.8,8.08 17.5,8.22C17.5,8.31 17.5,8.41 17.5,8.5C17.5,9.7 17.11,10.86 16.38,11.81C16.5,12 16.63,12.15 16.78,12.3C16.94,12.45 17.1,12.58 17.29,12.68C17.65,12.88 18.06,13 18.5,13C18.94,13 19.35,12.88 19.71,12.68C20.47,12.25 21,11.44 21,10.5A2.5,2.5 0 0,0 18.5,8M12,14C9.66,14 5,15.17 5,17.5V19H19V17.5C19,15.17 14.34,14 12,14M4.71,14.55C2.78,14.78 0,15.76 0,17.5V19H3V17.07C3,16.06 3.69,15.22 4.71,14.55M19.29,14.55C20.31,15.22 21,16.06 21,17.07V19H24V17.5C24,15.76 21.22,14.78 19.29,14.55M12,16C13.53,16 15.24,16.5 16.23,17H7.77C8.76,16.5 10.47,16 12,16Z">
+                </path>
+            </svg>
+        </button>
+        <button class="s-btn right-a">
+            <svg viewBox="0 0 24 24" id="volume0" height="28px">
+                <path fill="#fff" d="M12,4L9.91,6.09L12,8.18M4.27,3L3,4.27L7.73,9H3V15H7L12,20V13.27L16.25,17.53C15.58,18.04 14.83,18.46 14,18.7V20.77C15.38,20.45 16.63,19.82 17.68,18.96L19.73,21L21,19.73L12,10.73M19,12C19,12.94 18.8,13.82 18.46,14.64L19.97,16.15C20.62,14.91 21,13.5 21,12C21,7.72 18,4.14 14,3.23V5.29C16.89,6.15 19,8.83 19,12M16.5,12C16.5,10.23 15.5,8.71 14,7.97V10.18L16.45,12.63C16.5,12.43 16.5,12.21 16.5,12Z"></path>
+            </svg>
+            <svg viewBox="0 0 24 24" id="volume1" height="28px">
+                <path fill="#fff" d="M14,3.23V5.29C16.89,6.15 19,8.83 19,12C19,15.17 16.89,17.84 14,18.7V20.77C18,19.86 21,16.28 21,12C21,7.72 18,4.14 14,3.23M16.5,12C16.5,10.23 15.5,8.71 14,7.97V16C15.5,15.29 16.5,13.76 16.5,12M3,9V15H7L12,20V4L7,9H3Z"></path>
+            </svg>
+        </button>
+
+    </div>
+
+    <div class="by">Created by DanRotaru & Sîrbu Daniel</div>
+    
+    <div class="anim">
+        <div class="cube"></div>
+        <div class="cube cube1"></div>
+        <div class="cube cube2"></div>
+        <div class="triangle"></div>
+    </div>
+
+    <!-- --- 688 722------ -->
+    <footer>
+        <script src="cdn/jquery.min.js"></script>
+        <script src="cdn/jquery.touchSwipe.min.js"></script>
+        <script src="game.js"></script>
+
+        <script>
+            var confetti_show;
+        </script>
+        <script type="module">
+            import confetti from "https://cdn.skypack.dev/canvas-confetti";
+            confetti_show = confetti;
+        </script>
+    </footer>
+</body>
+</html>
